@@ -39,7 +39,7 @@ resource "aws_route_table" "private" {
 
 resource "aws_subnet" "private" {
   vpc_id            = "${aws_vpc.mod.id}"
-  cidr_block        = "${cidrsubnet(var.cidr, 8, count.index + 100)}"
+  cidr_block        = "${cidrsubnet(var.cidr, 8, count.index + 1 + length(var.azs))}"
   availability_zone = "${element(var.azs, count.index)}"
   count             = "${length(var.azs)}"
   tags              = "${merge(var.tags, var.private_subnet_tags, map("Name", format("%s-subnet-private-%s", var.name, element(var.azs, count.index))))}"
