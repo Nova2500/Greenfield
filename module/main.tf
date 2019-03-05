@@ -1,12 +1,28 @@
+#Got an idea: start a new repo (just locally) for a `terraform-module-vpc` and build out a vpc module catered to the following inputs:
+#- region
+#- name
+#- env_role
+#- cidr
+#- private_subnets (list)
+#- public_subnets (list)
+
+#Module should create a vpc with appropriate subnets and NAT gateways. Should utilize same number of AZs as private_subnets.
 
 ##################################################################################
 # PROVIDERS
 ##################################################################################
 
 provider "aws" {
-  access_key = "${var.aws_access_key}"
-  secret_key = "${var.aws_secret_key}"
-  region     = "${var.region}"
+  profile = "${var.profile}"
+  region  = "${var.region}"
+}
+
+locals {
+  env_role = "${lower(var.env_role)}"
+
+  tags = "${map(
+      "Env Role", "${lower(var.env_role)}",
+  )}"
 }
 
 ##################################################################################
@@ -16,7 +32,7 @@ provider "aws" {
 resource "aws_instance" "nginx" {
   ami           = "ami-c58c1dd3"
   instance_type = "t2.micro"
-  key_name        = "${var.key_name}"
+  key_name      = "${var.key_name}"
 
   connection {
     user        = "ec2-user"
@@ -26,8 +42,9 @@ resource "aws_instance" "nginx" {
   provisioner "remote-exec" {
     inline = [
       "sudo yum install nginx -y",
-      "sudo service nginx start"
+      "sudo service nginx start",
     ]
   }
-}
 
+  tags = "${local.tags}"
+}
