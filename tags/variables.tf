@@ -19,13 +19,13 @@ variable "managed_by" {
   description = "Entity which is managing the resource"
 }
 
+#Optional Variables
 variable "delimiter" {
   type        = "string"
   default     = "-"
   description = "Delimiter between `name`, `application`..."
 }
 
-#Optional Variables
 variable "attributes" {
   type = "list"
   description = "Additional attributes"
@@ -33,7 +33,9 @@ variable "attributes" {
 }
 
 variable "namespace" {
+  type = "string"
   description = "Namespace (Orginization or Project)"
+  default = ""
 }
 
 variable "add_tags" {
