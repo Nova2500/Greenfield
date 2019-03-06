@@ -16,12 +16,6 @@ variable "machine_role" {
 }
 
 #Optional Variables
-variable "delimiter" {
-  type        = "string"
-  default     = "-"
-  description = "Delimiter between `name`, `application`..."
-}
-
 variable "attributes" {
   type = "list"
   description = "Additional attributes"
