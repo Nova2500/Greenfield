@@ -1,16 +1,6 @@
-output "public_ip" {
-  description = "Public IP of instance (or EIP)"
-  value       = "${coalesce(join("", aws_eip.default.*.public_ip), join("", aws_instance.default.*.public_ip))}"
-}
-
-output "private_ip" {
-  description = "Private IP of instance"
-  value       = "${join("", aws_instance.default.*.private_ip)}"
-}
-
 output "id" {
-  description = "Disambiguated ID of the instance"
-  value       = "${join("", aws_instance.default.*.id)}"
+  description = "ID of the instance"
+  value       = "${aws_instance.default.*.id}"
 }
 
 output "public_dns" {
@@ -52,6 +42,18 @@ output "network_interface_id" {
   description = "ID of the network interface that was created with the instance"
   value       = "${join("", aws_instance.default.*.network_interface_id)}"
 }
+
+output "public_ip" {
+  description = "Public IP of instance (or EIP)"
+  value       = "${coalesce(join("", aws_eip.default.*.public_ip), join("", aws_instance.default.*.public_ip))}"
+}
+
+output "private_ip" {
+  description = "Private IP of instance"
+  value       = "${join("", aws_instance.default.*.private_ip)}"
+}
+
+
 
 # output "alarm" {
 #   description = "CloudWatch Alarm ID"

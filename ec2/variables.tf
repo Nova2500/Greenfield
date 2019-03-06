@@ -8,7 +8,7 @@ variable "instance_count" {
 }
 
 variable "ami" {
-  description = "The AMI to use for the instance. By default it is the AMI provided by Amazon with Ubuntu 16.04"
+  description = "The AMI to use for the instance"
 }
 
 variable "instance_type" {
@@ -16,15 +16,16 @@ variable "instance_type" {
 }
 
 variable "region" {
-  description = "AWS Region the instance is launched in"
+  description = "AWS Region in which the instance is launched"
 }
 
 variable "availability_zone" {
-  description = "Availability Zone the instance is launched in. If not set, will be launched in the first AZ of the region"
+  type = "list"
+  description = "Availability Zone in which the instance is launched"
 }
 
 variable "subnet" {
-  description = "VPC Subnet ID the instance is launched in"
+  description = "VPC Subnet ID in which the instance is launched"
 }
 
 variable "ssh_key_pair" {
@@ -32,13 +33,17 @@ variable "ssh_key_pair" {
 }
 
 variable "env" {
-  description = "Environment (e.g. `dev`, `prod`"
+  description = "Environment (e.g. `dev`, `prod`)"
+}
+variable "user_data" {
+  description = "User Data provided to instance"
+  default = ""
 }
 
 #Optional Variables
-variable "security_groups" {
-  description = "List of Security Group IDs allowed to connect to the instance"
+variable "security_group" {
   type        = "list"
+  description = "List of Security Group IDs allowed to connect to the instance"
   default     = []
 }
 
@@ -52,9 +57,9 @@ variable "root_volume_size" {
   default     = "10"
 }
 
-variable "ebs_volume_count" {
-  description = "Count of EBS volumes that will be attached to the instance"
-  default     = "0"
+variable "delete_on_termination" {
+  description = "Whether the volume should be destroyed on instance termination"
+  default     = "true"
 }
 
 variable "monitoring" {
@@ -62,12 +67,30 @@ variable "monitoring" {
   default     = "true"
 }
 
-variable "tags" {
-  description = "Additional tags"
-  type        = "map"
-  default     = {}
+variable "attributes" {
+  description = "Additional attributes (e.g. `1`)"
+  type        = "list"
+  default     = []
 }
 
+variable "associate_public_ip_address" {
+  description = "Associate a public IP address with the instance"
+  default     = "true"
+}
+
+variable "private_ip" {
+  description = "Private IP address to associate with the instance in the VPC"
+  default     = ""
+}
+
+variable "assign_eip_address" {
+  description = "Assign an Elastic IP address to the instance"
+  default     = "true"
+}
+variable "ebs_volume_count" {
+  description = "Count of EBS volumes that will be attached to the instance"
+  default     = "0"
+}
 variable "ebs_volume_type" {
   description = "The type of EBS volume. Can be standard, gp2 or io1"
   default     = "gp2"
@@ -78,28 +101,8 @@ variable "ebs_volume_size" {
   default     = "10"
 }
 
-variable "attributes" {
-  description = "Additional attributes (e.g. `1`)"
-  type        = "list"
-  default     = []
-}
-
-variable "delete_on_termination" {
-  description = "Whether the volume should be destroyed on instance termination"
-  default     = "true"
-}
-
-variable "associate_public_ip_address" {
-  description = "Associate a public IP address with the instance"
-  default     = "true"
-}
-
-variable "assign_eip_address" {
-  description = "Assign an Elastic IP address to the instance"
-  default     = "true"
-}
-
-variable "private_ip" {
-  description = "Private IP address to associate with the instance in the VPC"
-  default     = ""
+variable "add_tags" {
+  description = "Additional tags"
+  type        = "map"
+  default     = {}
 }

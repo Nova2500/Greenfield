@@ -7,9 +7,21 @@ variable "profile" {
   description = "AWS profile used to execute terraform"
 }
 
+variable "name" {
+  description = "Name to be used on all the resources as identifier"
+}
+
+variable "env_role" {
+  description = "Environment role for vpc"
+}
+
 variable "azs" {
   type        = "list"
   description = "A list of Availability zones in the region"
+}
+
+variable "cidr" {
+  description = "The CIDR block for the VPC"
 }
 
 variable "public_subnets" {
@@ -20,18 +32,6 @@ variable "public_subnets" {
 variable "private_subnets" {
   type        = "list"
   description = "A list of Private Subnets"
-}
-
-variable "name" {
-  description = "Name to be used on all the resources as identifier"
-}
-
-variable "cidr" {
-  description = "The CIDR block for the VPC"
-}
-
-variable "env_role" {
-  description = "Environment role for vpc"
 }
 
 # Optional
