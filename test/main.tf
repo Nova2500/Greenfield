@@ -13,7 +13,7 @@
 }
 # Example usage for Tags Module
 module "test_tags" {
-    #source        = "url/terraform-module-tags.git//compute?ref=master
+    source        = "../"
     name          = "scores"
     application   = "pong"
     env_name      = "dev"
