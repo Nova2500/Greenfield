@@ -9,6 +9,7 @@
    cidr            = "172.30.126.0/24"
    public_subnets  = ["172.30.126.0/26", "172.30.126.64/26"]
    private_subnets = ["172.30.126.128/26", "172.30.126.196/26"]
+   tags            = "${module.test_tags.tag_map}"
 }
 # Example usage for Tags Module
 module "test_tags" {
