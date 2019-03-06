@@ -15,10 +15,6 @@ variable "machine_role" {
   description = "Role of the resource"
 }
 
-variable "managed_by" {
-  description = "Entity which is managing the resource"
-}
-
 #Optional Variables
 variable "delimiter" {
   type        = "string"
@@ -36,10 +32,4 @@ variable "namespace" {
   type = "string"
   description = "Namespace (Orginization or Project)"
   default = ""
-}
-
-variable "add_tags" {
-  type = "map"
-  description = "Additional tags"
-  default = {}
 }
