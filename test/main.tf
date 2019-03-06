@@ -13,8 +13,9 @@
 # Example usage for Tags Module
 module "test_tags" {
     #source        = "url/terraform-module-tags.git//compute?ref=master
-    name          = "test"
-    application   = "test"
+    name          = "scores"
+    application   = "pong"
     env_name      = "dev"
-    machine_role  = "app"
+    machine_role  = "web"
+    managed_by    = "terraform"
 }
