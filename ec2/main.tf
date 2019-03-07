@@ -37,9 +37,8 @@ data "aws_ami" "default" {
 data "aws_ami" "info" {
   filter {
     name   = "image-id"
-    values = ["${local.ami}"]
+    values = ["${var.ami}"]
   }
-  owners = ["${local.ami_owner}"]
 }
 
 ##################################################################################
@@ -62,7 +61,7 @@ resource "aws_iam_role" "default" {
 }
 
 resource "aws_instance" "default" {
-  instance_count              = "${local.instance_count}"
+  instance_count              = "${var.instance_count}"
   ami                         = "${var.ami}"
   instance_type               = "${var.instance_type}"
   region           = "${var.region}"
