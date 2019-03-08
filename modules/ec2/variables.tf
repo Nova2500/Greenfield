@@ -47,6 +47,12 @@ variable "security_group" {
   default     = []
 }
 
+variable "cidr" {
+  type        = "list"
+  description = "The CIDR block for the VPC"
+  default = ["0.0.0.0/0"]
+}
+
 variable "root_volume_type" {
   description = "Type of root volume. Can be standard, gp2 or io1"
   default     = "gp2"
