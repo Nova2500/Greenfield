@@ -1,39 +1,53 @@
 # Example usage for vpc module
  module "test_vpc" {
-   source          = "../vpc"
-   region          = "us-west-2"
-   profile         = "test-dev"
-   name            = "shared-test"
-   env_role        = "sandbox"
-   azs             = ["us-west-2a", "us-west-2b"]
-   cidr            = "172.30.126.0/24"
-   public_subnets  = ["172.30.126.0/26", "172.30.126.64/26"]
-   private_subnets = ["172.30.126.128/26", "172.30.126.196/26"]
-   tags            = "${module.tags.tag_map}"
+   source          = "../modules/vpc"
+   region          = "${var.region}"
+   profile         = "${var.profile}"
+   name            = "${var.name}"
+   env_role        = "${var.env_role}"
+   azs             = "${var.azs}"
+   cidr            = "${var.cidr}"
+   public_subnets  = "${var.public_subnets}"
+   private_subnets = "${var.private_subnets}"
+   tags            = "${module.test_tags.tag_map}"
 }
 
 
 # Example usage for ec2 module
  module "test_ec2" {
-   source          = "../ec2"
-   name            = "test-cluster"
-   instance_count  = "3"
-   ami             = "ami-abc123"
-   instance_type   = "t2.micro"
-   region          = "US-East-1"
-   azs             = "US-East-1a"
-   subnet          = "subnet-use1a"
-   ssh_key_pair    = "Master"
-   env             = "dev"
-   tags            = "${module.tags.tag_map}"
+   source          = "../modules/ec2"
+   name            = "${var.name}"
+   instance_count  = "${var.instance_count}"
+   ami             = "${var.ami}"
+   instance_type   = "${var.instance_type}"
+   region          = "${var.region}"
+   azs             = "${var.azs}"
+   subnet          = "${var.subnet}"
+   ssh_key_pair    = "${var.ssh_key_pair}"
+   env             = "${var.env}"
+   tags            = "${module.test_tags.tag_map}"
 }
 
 
 # Example usage for Tags module
 module "test_tags" {
-    source        = "../"
-    name          = "scores"
-    application   = "pong"
-    env_name      = "dev"
-    machine_role  = "web"
+    source        = "../modules/tags"
+    name          = "${var.name}"
+    application   = "${var.application}"
+    env_name      = "${var.env_name}"
+    machine_role  = "${var.machine_role}"
+    attributes    = "${var.attributes}"
+    namespace     = "${var.namespace}"
+}
+
+
+# Example usage for Bucket module
+module "test_bucket" {
+    source        = "../modules/s3"
+    name          = "${var.name}"
+    application   = "${var.application}"
+    env_name      = "${var.env_name}"
+    machine_role  = "${var.machine_role}"
+    attributes    = "${var.attributes}"
+    namespace     = "${var.namespace}"
 }

@@ -19,7 +19,7 @@ variable "region" {
   description = "AWS Region in which the instance is launched"
 }
 
-variable "availability_zone" {
+variable "azs" {
   type = "list"
   description = "Availability Zone in which the instance is launched"
 }

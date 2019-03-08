@@ -65,7 +65,7 @@ resource "aws_instance" "default" {
   ami                         = "${var.ami}"
   instance_type               = "${var.instance_type}"
   region           = "${var.region}"
-  availability_zone           = "${var.availability_zone}"
+  availability_zone           = "${var.azs}"
   subnet                      = "${var.subnet}"
   ssh_key_pair                = "${var.ssh_key_pair}"
   env                         = "${var.env}"
@@ -86,7 +86,7 @@ resource "aws_instance" "default" {
 
 resource "aws_ebs_volume" "default" {
   count             = "${var.ebs_volume_count}"
-  availability_zone = "${var.availability_zone}"
+  availability_zone = "${var.azs}"
   type              = "${var.ebs_volume_type}"
   size              = "${var.ebs_volume_size}"
   tags              = "${var.add_tags}"
