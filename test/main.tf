@@ -45,9 +45,8 @@ module "test_tags" {
 module "test_bucket" {
     source        = "../modules/s3"
     name          = "${var.name}"
-    application   = "${var.application}"
-    env_name      = "${var.env_name}"
-    machine_role  = "${var.machine_role}"
-    attributes    = "${var.attributes}"
-    namespace     = "${var.namespace}"
+    tags          = {
+      BillingCode = "${var.billing_code_tag}"
+      Environment = "${var.environment_tag}"
+    }
 }

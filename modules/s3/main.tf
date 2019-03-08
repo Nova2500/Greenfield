@@ -8,6 +8,9 @@ variable "tags" {
     default = {}
 }
 
+variable "billing_code_tag" {}
+variable "environment_tag" {}
+
 resource "aws_s3_bucket" "bucket" {
     bucket = "${var.name}"
     acl = "private"
