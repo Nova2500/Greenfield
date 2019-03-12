@@ -30,9 +30,9 @@ output "Public Security Group" {
 ##################################################################
 
 output "Public Instance IDs" {
-  value = "${module.compute.server_id)}"
+  value = "${module.compute.server_id}"
 }
 
 output "Public Instance IPs" {
-  value = "${module.compute.server_ip)}"
+  value = "${module.compute.server_ip}"
 }
