@@ -38,11 +38,10 @@ output "igw_id" {
   value = "${aws_internet_gateway.mod.id}"
 }
 
-
 ##################################################################################
 # OUTPUT
 ##################################################################################
 
 output "aws_instance_public_dns" {
-    value = "${aws_instance.nginx.public_dns}"
+  value = "${aws_instance.nginx.public_dns}"
 }

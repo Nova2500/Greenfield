@@ -14,10 +14,10 @@ module "ec2" {
 }
 
 module "security_group" {
-  source  = "../"
-  name        = "default"
-  description = "Security group for EC2 instance"
-  vpc_id      = "${data.aws_vpc.default.id}"
+  source              = "../"
+  name                = "default"
+  description         = "Security group for EC2 instance"
+  vpc_id              = "${data.aws_vpc.default.id}"
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules       = ["http-80-tcp", "all-icmp"]
   egress_rules        = ["all-all"]

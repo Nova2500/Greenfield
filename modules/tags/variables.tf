@@ -17,13 +17,13 @@ variable "machine_role" {
 
 #Optional Variables
 variable "attributes" {
-  type = "list"
+  type        = "list"
   description = "Additional attributes"
-  default = []
+  default     = []
 }
 
 variable "namespace" {
-  type = "string"
+  type        = "string"
   description = "Namespace (Orginization or Project)"
-  default = ""
+  default     = ""
 }

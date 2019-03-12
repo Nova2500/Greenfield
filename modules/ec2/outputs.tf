@@ -53,14 +53,14 @@ output "private_ip" {
   value       = "${join("", aws_instance.default.*.private_ip)}"
 }
 
-
-
 # output "alarm" {
 #   description = "CloudWatch Alarm ID"
 #   value       = "${join("", aws_cloudwatch_metric_alarm.default.*.id)}"
 # }
 
+
 # output "additional_eni_ids" {
 #   description = "Map of ENI to EIP"
 #   value       = "${zipmap(aws_network_interface.additional.*.id, aws_eip.additional.*.public_ip)}"
 # }
+

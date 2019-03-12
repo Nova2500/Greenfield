@@ -9,4 +9,3 @@ output "tag_map" {
       "Namespace", "${local.namespace}"
     )}"
 }
-

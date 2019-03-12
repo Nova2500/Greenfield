@@ -5,18 +5,18 @@
 variable "name" {}
 
 variable "tags" {
-    default = {}
+  default = {}
 }
 
 variable "billing_code_tag" {}
 variable "environment_tag" {}
 
 resource "aws_s3_bucket" "bucket" {
-    bucket = "${var.name}"
-    acl = "private"
-    force_destroy = "true"
+  bucket        = "${var.name}"
+  acl           = "private"
+  force_destroy = "true"
 
-    policy = <<EOF
+  policy = <<EOF
     {
         "Version": "2008-10-17",
         "Statement": [
@@ -45,22 +45,23 @@ resource "aws_s3_bucket" "bucket" {
     }
     EOF
 
-    tags = "${merge(var.tags, map("Name", format("%s-web-bucket", var.name)))}"
+  tags = "${merge(var.tags, map("Name", format("%s-web-bucket", var.name)))}"
 }
 
 resource "aws_iam_user" "s3" {
-    name = "${var.name}-s3"
-    force_destroy = "true"
+  name          = "${var.name}-s3"
+  force_destroy = "true"
 }
 
 resource "aws_iam_access_key" "s3" {
-    user = "${aws_iam_user.s3.name}"
+  user = "${aws_iam_user.s3.name}"
 }
 
 resource "aws_iam_user_policy" "s3_policy" {
-    name = "${var.name}-s3-policy"
-    user = "${aws_iam_user.s3.name}"
-    policy = <<EOF
+  name = "${var.name}-s3-policy"
+  user = "${aws_iam_user.s3.name}"
+
+  policy = <<EOF
     {
         "Version": "2012-10-17",
         "Statement": []
@@ -77,11 +78,11 @@ resource "aws_iam_user_policy" "s3_policy" {
 }
 
 output "iam_access_key_id" {
-    value = "${aws_iam_access_key.s3.id}"
+  value = "${aws_iam_access_key.s3.id}"
 }
 
 output "iam_access_key_id" {
-    value = "${aws_iam_access_key.s3.secret}"
+  value = "${aws_iam_access_key.s3.secret}"
 }
 
 output "bucket" {
@@ -91,4 +92,3 @@ output "bucket" {
 output "bucket_id" {
   value = "${aws_s3_bucket.bucket.id}"
 }
-

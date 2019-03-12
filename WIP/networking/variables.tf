@@ -7,7 +7,7 @@ variable "vpc_cidr" {}
 variable "public_subnet_count" {}
 
 variable "public_cidrs" {
-    type = "list"
+  type = "list"
 }
 
 variable "accessip" {}

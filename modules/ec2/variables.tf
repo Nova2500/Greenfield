@@ -20,7 +20,7 @@ variable "region" {
 }
 
 variable "azs" {
-  type = "list"
+  type        = "list"
   description = "Availability Zone in which the instance is launched"
 }
 
@@ -35,9 +35,10 @@ variable "ssh_key_pair" {
 variable "env" {
   description = "Environment (e.g. `dev`, `prod`)"
 }
+
 variable "user_data" {
   description = "User Data provided to instance"
-  default = ""
+  default     = ""
 }
 
 #Optional Variables
@@ -50,7 +51,7 @@ variable "security_group" {
 variable "cidr" {
   type        = "list"
   description = "The CIDR block for the VPC"
-  default = ["0.0.0.0/0"]
+  default     = ["0.0.0.0/0"]
 }
 
 variable "root_volume_type" {
@@ -93,10 +94,12 @@ variable "assign_eip_address" {
   description = "Assign an Elastic IP address to the instance"
   default     = "true"
 }
+
 variable "ebs_volume_count" {
   description = "Count of EBS volumes that will be attached to the instance"
   default     = "0"
 }
+
 variable "ebs_volume_type" {
   description = "The type of EBS volume. Can be standard, gp2 or io1"
   default     = "gp2"

@@ -22,14 +22,18 @@ data "aws_subnet_ids" "all" {
 
 data "aws_ami" "amazon_linux" {
   most_recent = true
+
   filter {
     name = "name"
+
     values = [
       "amzn-ami-hvm-*-x86_64-gp2",
     ]
   }
+
   filter {
     name = "owner-alias"
+
     values = [
       "amazon",
     ]
@@ -43,6 +47,7 @@ resource "aws_ebs_volume" "ec2_ebs" {
   availability_zone = "${module.ec2.availability_zone[0]}"
   size              = "${var.aws_ebs_volume_size}"
 }
+
 resource "aws_volume_attachment" "ec2" {
   device_name = "/dev/sdh"
   volume_id   = "${aws_ebs_volume.ec2_ebs.id}"

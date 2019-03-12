@@ -18,10 +18,11 @@ variable "name" {
 }
 
 variable "ami" {
-  type = "map"
+  type        = "map"
   description = "AWS AMI to be used ('Dev', 'Test', or 'Prod')"
+
   default = {
-    Dev = "${data.aws_ami.amazon_linux.id}"
+    Dev  = "${data.aws_ami.amazon_linux.id}"
     Test = "${data.aws_ami.amazon_linux.id}"
     Prod = "${data.aws_ami.amazon_linux.id}"
   }
@@ -29,5 +30,5 @@ variable "ami" {
 
 variable "aws_ebs_volume_size" {
   description = "EBS Volume Size"
-  default = 1
+  default     = 1
 }
